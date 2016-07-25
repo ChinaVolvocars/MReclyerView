@@ -1,11 +1,11 @@
 package tiger.com.mreclyerview;
 
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,63 +28,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        mDoubleClickExitHelper = new DoubleClickExitHelper(this);
         data = new ArrayList();
-        data.add("a");
-        data.add("b");
-        data.add("c");
-        data.add("d");
-        data.add("e");
-        data.add("f");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
-        data.add("g");
+        for (int i = 0; i < 100; i++) {
+            data.add("a" + i);
+        }
 
         RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
             @Override
@@ -119,5 +67,17 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    DoubleClickExitHelper mDoubleClickExitHelper;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        boolean flag = true;
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return mDoubleClickExitHelper.onKeyDown(keyCode, recylerview);
+        }
+        return flag;
+
     }
 }
